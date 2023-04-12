@@ -6,6 +6,8 @@ import { LoggerProps } from '../logger/logger.interface';
 import { TYPES } from '../types';
 import 'reflect-metadata';
 import { UserProps } from './user.interface';
+import { userLoginDto } from './dto/userLogin.dto';
+import { userRegisterDto } from './dto/userRegister.dto';
 
 @injectable()
 export class UserController extends BaseController implements UserProps {
@@ -25,11 +27,13 @@ export class UserController extends BaseController implements UserProps {
 		]);
 	}
 
-	login(req: Request, res: Response, next: NextFunction): void {
+	login(req: Request<{}, {}, userLoginDto>, res: Response, next: NextFunction): void {
+		console.log(req.body);
 		next(new HttpError(401, 'ошибка авторизации', 'login'));
 	}
 
-	register(req: Request, res: Response, next: NextFunction): void {
+	register(req: Request<{}, {}, userRegisterDto>, res: Response, next: NextFunction): void {
+		console.log(req.body);
 		this.ok(res, 'register');
 	}
 }
