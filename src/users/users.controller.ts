@@ -25,11 +25,11 @@ export class UserController extends BaseController implements UserProps {
 		]);
 	}
 
-	login(req: Request, res: Response, next: NextFunction) {
+	login(req: Request, res: Response, next: NextFunction): void {
 		next(new HttpError(401, 'ошибка авторизации', 'login'));
 	}
 
-	register(req: Request, res: Response, next: NextFunction) {
+	register(req: Request, res: Response, next: NextFunction): void {
 		this.ok(res, 'register');
 	}
 }

@@ -7,6 +7,11 @@ import { LoggerProps } from './logger/logger.interface';
 import { TYPES } from './types';
 import { ExceptionFilterInterfaceProps } from './error/exception.filter.interface';
 
+export interface bootstrapProps {
+	appContainer: Container;
+	app: App;
+}
+
 export const appBindings = new ContainerModule((bind: interfaces.Bind) => {
 	bind<LoggerProps>(TYPES.LoggerProps).to(LoggerService);
 	bind<ExceptionFilterInterfaceProps>(TYPES.ExceptionFilter).to(ExceptionFilter);
@@ -14,7 +19,7 @@ export const appBindings = new ContainerModule((bind: interfaces.Bind) => {
 	bind<App>(TYPES.Application).to(App);
 });
 
-function bootstrap() {
+function bootstrap(): bootstrapProps {
 	const appContainer = new Container();
 	appContainer.load(appBindings);
 	const app = appContainer.get<App>(TYPES.Application);

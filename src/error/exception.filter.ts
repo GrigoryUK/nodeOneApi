@@ -10,7 +10,7 @@ import 'reflect-metadata';
 export class ExceptionFilter implements ExceptionFilterInterfaceProps {
 	constructor(@inject(TYPES.LoggerProps) private logger: LoggerProps) {}
 
-	catch(err: Error | HttpError, req: Request, res: Response, next: NextFunction) {
+	catch(err: Error | HttpError, req: Request, res: Response, next: NextFunction): void {
 		if (err instanceof HttpError) {
 			this.logger.error(`${err.context} Ошибка ${err.statusCode} : ${err.message}`);
 			res.status(err.statusCode).send({ err: err.message });
